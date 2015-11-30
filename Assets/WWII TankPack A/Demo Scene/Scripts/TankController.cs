@@ -4,19 +4,19 @@ using System.Collections;
 public class TankController : MonoBehaviour {
 	
 	
-	MoveTrack leftTrack;
-	MoveTrack rightTrack;
+	public MoveTrack leftTrack;
+	public MoveTrack rightTrack;
 	
-	float acceleration = 5;
+	public float acceleration = 5;
 	
-	float currentVelocity = 0;
-	float maxSpeed = 25;
+	public float currentVelocity = 0;
+	public float maxSpeed = 25;
 	
-	float rotationSpeed = 30;
+	public float rotationSpeed = 30;
 	
-	Transform spawnPoint;
-	GameObject bulletObject;
-	GameObject fireEffect;
+	public Transform spawnPoint;
+	public GameObject bulletObject;
+	public GameObject fireEffect;
 	
 	void  Start (){
 		
