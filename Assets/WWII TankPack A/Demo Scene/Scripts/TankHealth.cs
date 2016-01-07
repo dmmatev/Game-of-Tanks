@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TankHealthManager : MonoBehaviour {
+public class TankHealth : MonoBehaviour {
 
 	public int maxHealth;
 	int currentHealth;

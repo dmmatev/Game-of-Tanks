@@ -4,9 +4,9 @@ using System.Collections;
 public class MoveTrack : MonoBehaviour {
 	
 	
-	int currentTTIdx = 0;
-	Texture[] trackTexturs;
-	float moveTick = 0.1f;
+	public int currentTTIdx = 0;
+	public  Texture[] trackTexturs;
+	public float moveTick = 0.1f;
 	public float speed = 40; //  km/h
 	public int GearStatus = 0;
 	
@@ -30,7 +30,7 @@ public class MoveTrack : MonoBehaviour {
 					currentTTIdx = 0;
 				
 				GetComponent<Renderer>().material.mainTexture = trackTexturs[currentTTIdx]; 
-				
+				  
 				// One Texture made 4cm move
 				moveTick = Time.time + 4 / (speed * 1000 / (60 * 60) * 100);
 			}

@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ArmorManager : MonoBehaviour {
+public class Armor : MonoBehaviour {
 
 	public int armor;
-	public TankHealthManager tankHealthManager;
+	public TankHealth tankHealthManager;
 
 
 	void Start () {

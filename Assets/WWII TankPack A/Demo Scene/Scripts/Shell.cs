@@ -4,10 +4,10 @@ using System.Collections;
 public class Shell : MonoBehaviour {
 	
 	
-	float speed = 200;
-	float range = 400;
-	
-	GameObject ExploPtcl;
+	private float speed = 200;
+	private float range = 400;
+	public int armorPenetrationMM = 100;	
+	public GameObject ExploPtcl;
 	
 	private float dist;
 	

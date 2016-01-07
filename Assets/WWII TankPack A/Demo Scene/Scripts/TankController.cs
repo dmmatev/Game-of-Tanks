@@ -4,15 +4,14 @@ using System.Collections;
 public class TankController : MonoBehaviour {
 	
 	
-	public MoveTrack leftTrack;
-	public MoveTrack rightTrack;
+	private MoveTrack leftTrack;
+	private MoveTrack rightTrack;
 	
 	public float acceleration = 5;
-	
 	public float currentVelocity = 0;
 	public float maxSpeed = 25;
-	
 	public float rotationSpeed = 30;
+	public int armorPenetrationMM = 100;
 	
 	public Transform spawnPoint;
 	public GameObject bulletObject;
@@ -126,10 +125,12 @@ public class TankController : MonoBehaviour {
 		if (Input.GetButtonDown("Fire1")) {
 			// make fire effect.
 			Instantiate(fireEffect, spawnPoint.position, spawnPoint.rotation);
-			
+
 			// make ball
-			Instantiate(bulletObject, spawnPoint.position, spawnPoint.rotation);
+			GameObject shell = Instantiate(bulletObject, spawnPoint.position, spawnPoint.rotation) as GameObject;
+			shell.GetComponent<Shell>().armorPenetrationMM = armorPenetrationMM;
+
 		}
-		
+
 	}
 }
