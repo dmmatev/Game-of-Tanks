@@ -129,7 +129,6 @@ public class TankController : MonoBehaviour {
 			// make ball
 			GameObject shell = Instantiate(bulletObject, spawnPoint.position, spawnPoint.rotation) as GameObject;
 			shell.GetComponent<Shell>().armorPenetrationMM = armorPenetrationMM;
-
 		}
 
 	}
