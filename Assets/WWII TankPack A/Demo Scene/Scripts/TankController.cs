@@ -11,7 +11,7 @@ public class TankController : MonoBehaviour {
 	public float currentVelocity = 0;
 	public float maxSpeed = 25;
 	public float rotationSpeed = 30;
-	public int armorPenetrationMM = 100;
+	public int armorPenetrationMM = 163;
 	
 	public Transform spawnPoint;
 	public GameObject bulletObject;

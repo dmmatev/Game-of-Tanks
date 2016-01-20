@@ -18,7 +18,6 @@ public class Shell : MonoBehaviour {
 		
 		// Record Distance.
 		dist += Time.deltaTime * speed;
-		
 		// If reach to my range, Destroy. 
 		if(dist >= range) {
 			Instantiate(ExploPtcl, transform.position, transform.rotation);
@@ -31,6 +30,7 @@ public class Shell : MonoBehaviour {
 		// If hit something, Destroy. 
 		Instantiate(ExploPtcl, transform.position, transform.rotation);
 		Destroy(gameObject);
+		Debug.Log(armorPenetrationMM);
 	}
 	
 }
