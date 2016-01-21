@@ -6,6 +6,9 @@ public class Shell : MonoBehaviour {
 	
 	private float speed = 200;
 	private float range = 400;
+	public int minDamage = 200;
+	public int maxDamage = 410;
+	private int damage;
 	public int armorPenetrationMM = 100;	
 	public GameObject ExploPtcl;
 	
@@ -24,13 +27,18 @@ public class Shell : MonoBehaviour {
 			Destroy(gameObject);
 		}
 	}
-	
+	int getDamage(){
+		
+		System.Random rnd = new Random();
+		damage = rnd.Next(minDamage, maxDamage);
+
+		return damage;
+	}
 	
 	void  OnTriggerEnter ( Collider other  ){
 		// If hit something, Destroy. 
 		Instantiate(ExploPtcl, transform.position, transform.rotation);
 		Destroy(gameObject);
-		Debug.Log(armorPenetrationMM);
 	}
 	
 }
