@@ -22,7 +22,9 @@ public class Armor : MonoBehaviour {
 			Shell shell = collision.collider.GetComponent<Shell>();
 			// get the angle of the collision 
 			// get the angle ot the collision (bounse or not)
-			tankHealthManager.subtractTankHealth(shell.getDamage());
+			if(armor< shell.armorPenetrationMM){
+				tankHealthManager.subtractTankHealth(shell.getDamage());
+			}
 		}
 	}
 }

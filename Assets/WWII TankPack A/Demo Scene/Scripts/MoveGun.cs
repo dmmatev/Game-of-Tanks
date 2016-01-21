@@ -23,14 +23,14 @@ public class MoveGun : MonoBehaviour {
 			float currentRotationX = transform.rotation.eulerAngles.x;
 			//Debug.Log(currentRotationX);
 			if((currentRotationX - newRotation.x < - 180 || currentRotationX - newRotation.x < 180 
-				&& currentRotationX - newRotation.x >= 0) 
-				&& ((currentRotationX >= 320 && currentRotationX <= 359)
-					|| (currentRotationX >= 0 && currentRotationX <= 10))){
+				&& currentRotationX - newRotation.x >= 0) ){
+//				&& ((currentRotationX >= 320 && currentRotationX <= 359)
+//					|| (currentRotationX >= 0 && currentRotationX <= 10))){
 
 				transform.Rotate(-speed * Time.deltaTime , 0f , 0f);
-			}else if((currentRotationX >= 0 && currentRotationX <= 10) 
-				|| (currentRotationX >= 320 && currentRotationX <= 359)){
-
+//			}else if((currentRotationX >= 0 && currentRotationX <= 10) 
+//				|| (currentRotationX >= 320 && currentRotationX <= 359)){
+			}else{
 				transform.Rotate(speed * Time.deltaTime , 0f , 0f);
 			}
 		}
