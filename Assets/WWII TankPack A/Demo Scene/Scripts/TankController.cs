@@ -12,6 +12,8 @@ public class TankController : MonoBehaviour {
 	public float maxSpeed = 25;
 	public float rotationSpeed = 30;
 	public int armorPenetrationMM = 163;
+	public int minDamage = 200;
+	public int maxDamage = 410;
 	
 	public Transform spawnPoint;
 	public GameObject bulletObject;
@@ -129,6 +131,8 @@ public class TankController : MonoBehaviour {
 			// make ball
 			GameObject shell = Instantiate(bulletObject, spawnPoint.position, spawnPoint.rotation) as GameObject;
 			shell.GetComponent<Shell>().armorPenetrationMM = armorPenetrationMM;
+			shell.GetComponent<Shell>().minDamage = minDamage;
+			shell.GetComponent<Shell>().maxDamage = maxDamage;
 		}
 
 	}

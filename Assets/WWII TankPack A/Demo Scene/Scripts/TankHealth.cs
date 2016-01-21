@@ -19,6 +19,7 @@ public class TankHealth : MonoBehaviour {
 	}
 	public void subtractTankHealth(int health){
 		currentHealth -= health;
+		Debug.Log(currentHealth);
 	}
 
 }
