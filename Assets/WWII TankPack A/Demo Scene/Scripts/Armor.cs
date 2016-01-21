@@ -27,7 +27,7 @@ public class Armor : MonoBehaviour {
 			// get the collider that colides with the armor
 			// get the angle ot the collision (bounse or not)
 			// generate number (for example from 300 to 410) for the dmg (this depends on the shell)
-			tankHealthManager.subtractTankHealth(shell.armorPenetrationMM);
+			tankHealthManager.subtractTankHealth(shell.getDamage());
 		}
 	}
 }

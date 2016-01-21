@@ -27,7 +27,7 @@ public class Shell : MonoBehaviour {
 			Destroy(gameObject);
 		}
 	}
-	int getDamage(){
+	public int getDamage(){
 		
 		System.Random rnd = new System.Random();
 		damage = rnd.Next(minDamage, maxDamage);
