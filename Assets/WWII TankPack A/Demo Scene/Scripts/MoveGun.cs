@@ -21,7 +21,7 @@ public class MoveGun : MonoBehaviour {
 		//Debug.Log(transform.rotation.eulerAngles.x);
 		if(Mathf.Abs (newRotation.x - transform.rotation.eulerAngles.x) > 1f){
 			float currentRotationX = transform.rotation.eulerAngles.x;
-			Debug.Log(currentRotationX);
+			//Debug.Log(currentRotationX);
 			if((currentRotationX - newRotation.x < - 180 || currentRotationX - newRotation.x < 180 
 				&& currentRotationX - newRotation.x >= 0) 
 				&& ((currentRotationX >= 320 && currentRotationX <= 359)

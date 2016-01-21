@@ -4,20 +4,21 @@ using System.Collections;
 public class Armor : MonoBehaviour {
 
 	public int armor;
-	public TankHealth tankHealthManager;
+	private TankHealth tankHealthManager;
 
 
 	void Start () {
+		tankHealthManager = GetComponent<TankHealth>();
 
 	}
 	
 	// Update is called once per frame
 //	void Update () {
-//	
+//
 //	}
 
 	void OnCollisionEnter(Collision collision){
-		if(!tankHealthManager.isDead()){
+		if(!tankHealthManager.isDead() && collision.GetType() == typeof(Shell)){
 			Shell shell = collision.collider.GetComponent<Shell>();
 			// get the angle of the collision 
 			// get the collider that colides with the armor
