@@ -6,7 +6,7 @@ public class Shell : MonoBehaviour {
 	
 	private float speed = 200;
 	private float range = 400;
-	public int minDamage = 200;
+	public int minDamage = 300;
 	public int maxDamage = 410;
 	private int damage;
 	public int armorPenetrationMM = 100;	

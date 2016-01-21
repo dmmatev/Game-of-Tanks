@@ -12,7 +12,7 @@ public class TankController : MonoBehaviour {
 	public float maxSpeed = 25;
 	public float rotationSpeed = 30;
 	public int armorPenetrationMM = 163;
-	public int minDamage = 200;
+	public int minDamage = 300;
 	public int maxDamage = 410;
 	
 	public Transform spawnPoint;
