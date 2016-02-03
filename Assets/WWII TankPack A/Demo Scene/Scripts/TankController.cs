@@ -7,11 +7,13 @@ public class TankController : MonoBehaviour {
 	private MoveTrack leftTrack;
 	private MoveTrack rightTrack;
 	private TankHealth tankHealth;
+	private float currentTime;
 	
-	public float acceleration = 5;
-	public float currentVelocity = 0;
-	public float maxSpeed = 25;
-	public float rotationSpeed = 30;
+	public float acceleration = 5f;
+	public float reloadTime = 10f;
+	public float currentVelocity = 0f;
+	public float maxSpeed = 25f;
+	public float rotationSpeed = 30f;
 	public int armorPenetrationMM = 163;
 	public int minDamage = 300;
 	public int maxDamage = 410;
@@ -19,6 +21,7 @@ public class TankController : MonoBehaviour {
 	public Transform spawnPoint;
 	public GameObject bulletObject;
 	public GameObject fireEffect;
+
 	
 	void  Start (){
 		
@@ -28,10 +31,13 @@ public class TankController : MonoBehaviour {
 		tankHealth = GetComponent<TankHealth>();
 		
 	}
-	
+
+	void FixedUpdate(){
+		
+	}
 	
 	void  Update (){
-		if(!tankHealth.isDead()){
+		if(!tankHealth.empty()){
 		
 			if (Input.GetKey (KeyCode.UpArrow)) {
 				// plus speed
@@ -127,7 +133,7 @@ public class TankController : MonoBehaviour {
 			
 			
 			// Fire!
-			if (Input.GetButtonDown("Fire1")) {
+			if (Input.GetButtonDown("Fire1") ) {
 				// make fire effect.
 				Instantiate(fireEffect, spawnPoint.position, spawnPoint.rotation);
 

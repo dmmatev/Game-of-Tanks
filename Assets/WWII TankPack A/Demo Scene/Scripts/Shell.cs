@@ -5,7 +5,7 @@ public class Shell : MonoBehaviour {
 	
 	
 	private float speed = 200;
-	private float range = 400;
+	private float range = 2f;
 	public int minDamage = 300;
 	public int maxDamage = 410;
 	private int damage;
@@ -13,14 +13,19 @@ public class Shell : MonoBehaviour {
 	public GameObject ExploPtcl;
 	
 	private float dist;
-	
+
+	void Start() {
+		GetComponent<Rigidbody>().AddForce(Vector3.forward * 500f);
+	}
+
 	void  Update (){
 
 		// Move Ball forward
+		/*
 		transform.Translate(Vector3.forward * Time.deltaTime * speed);
-		
+		*/
 		// Record Distance.
-		dist += Time.deltaTime * speed;
+		dist += Time.deltaTime;
 		// If reach to my range, Destroy. 
 		if(dist >= range) {
 			Instantiate(ExploPtcl, transform.position, transform.rotation);

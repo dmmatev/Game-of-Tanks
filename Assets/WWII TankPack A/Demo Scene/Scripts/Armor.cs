@@ -18,7 +18,7 @@ public class Armor : MonoBehaviour {
 //	}
 
 	void OnCollisionEnter(Collision collision){
-		if(!tankHealthManager.isDead() && collision.gameObject.tag == "Shell"){
+		if(!tankHealthManager.empty() && collision.gameObject.tag == "Shell"){
 			Shell shell = collision.collider.GetComponent<Shell>();
 			// get the angle of the collision 
 			// get the angle ot the collision (bounse or not)

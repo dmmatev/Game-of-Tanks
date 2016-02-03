@@ -10,7 +10,7 @@ public class TankHealth : MonoBehaviour {
 		currentHealth = maxHealth;
 	}
 
-	public bool isDead(){
+	public bool empty(){
 		return (currentHealth <= 0)? true:false;
 	}
 
