@@ -15,7 +15,7 @@ public class Shell : MonoBehaviour {
 	private float dist;
 
 	void Start() {
-		GetComponent<Rigidbody>().AddForce(Vector3.forward * 500f);
+		GetComponent<Rigidbody>().AddForce(Vector3.forward * 5f);
 	}
 
 	void  Update (){
@@ -40,10 +40,11 @@ public class Shell : MonoBehaviour {
 		return damage;
 	}
 	
-	void  OnTriggerEnter ( Collider other  ){
+	void OnCollisionEnter(Collision collision){
 		// If hit something, Destroy. 
 		Instantiate(ExploPtcl, transform.position, transform.rotation);
 		Destroy(gameObject);
+		Debug.Log("AHGSDKJHAGSKDJHGA");
 	}
 	
 }
