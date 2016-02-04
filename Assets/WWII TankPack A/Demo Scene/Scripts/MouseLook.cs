@@ -44,14 +44,26 @@ public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
 	
 	public float minimumY = -60F;
 	public float maximumY = 60F;
+
+	public float minFov = 15f;
+	public float maxFov = 90f;
+	public float sensitivity = 10f;
 	
 	float rotationY = 0F;
+
+	void cameraZoom () {
+		float fov = Camera.main.fieldOfView;
+		fov += Input.GetAxis("Mouse ScrollWheel") * sensitivity;
+		fov = Mathf.Clamp(fov, minFov, maxFov);
+		Camera.main.fieldOfView = fov;
+	}
 	
 	void Update ()
 	{
 		if(!Input.GetButton("Ctrl")){
 			Screen.lockCursor = true;
 			Cursor.visible = false;
+			cameraZoom();
 			if (axes == RotationAxes.MouseXAndY)
 			{
 				float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;

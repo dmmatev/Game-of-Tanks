@@ -8,6 +8,7 @@ public class TankController : MonoBehaviour {
 	private MoveTrack rightTrack;
 	private TankHealth tankHealth;
 	private float currentTime;
+	private float distToGround;
 	
 	public float acceleration = 5f;
 	public float reloadTime = 10f;
@@ -21,7 +22,6 @@ public class TankController : MonoBehaviour {
 	public Transform spawnPoint;
 	public GameObject bulletObject;
 	public GameObject fireEffect;
-
 	
 	void  Start (){
 		
@@ -29,7 +29,12 @@ public class TankController : MonoBehaviour {
 		leftTrack = GameObject.Find(gameObject.name + "/Lefttrack").GetComponent<MoveTrack>();
 		rightTrack = GameObject.Find(gameObject.name + "/Righttrack").GetComponent<MoveTrack>();
 		tankHealth = GetComponent<TankHealth>();
+		distToGround = GetComponent<Collider>().bounds.extents.y;
 		
+	}
+
+	bool isGrounded(){
+		return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
 	}
 
 	void FixedUpdate(){
