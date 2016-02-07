@@ -7,7 +7,7 @@ public class MoveTurret : MonoBehaviour {
 
 	private Vector3 newRotation;
 	
-	void  FixedUpdate (){
+	void  Update (){
 
 		RaycastHit hit;
 		Ray ray = cameraPlayer.ScreenPointToRay(Input.mousePosition);
