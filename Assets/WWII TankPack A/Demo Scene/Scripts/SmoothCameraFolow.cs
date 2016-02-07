@@ -33,7 +33,6 @@ public class SmoothCameraFolow : MonoBehaviour {
 
 
 		transform.position = new Vector3(transform.position.x, currentHeight, transform.position.z);
-		Debug.Log(currentHeight);
 
 	}
 }

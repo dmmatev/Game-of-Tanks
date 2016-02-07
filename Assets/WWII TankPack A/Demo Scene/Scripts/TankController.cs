@@ -30,6 +30,7 @@ public class TankController : MonoBehaviour {
 		rightTrack = GameObject.Find(gameObject.name + "/Righttrack").GetComponent<MoveTrack>();
 		tankHealth = GetComponent<TankHealth>();
 		distToGround = GetComponent<Collider>().bounds.extents.y;
+		gameObject.tag = "Player";
 		
 	}
 
