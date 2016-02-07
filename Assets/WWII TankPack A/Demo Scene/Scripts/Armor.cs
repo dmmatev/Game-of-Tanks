@@ -11,11 +11,6 @@ public class Armor : MonoBehaviour {
 		tankHealthManager = GetComponent<TankHealth>();
 
 	}
-	
-	// Update is called once per frame
-//	void Update () {
-//
-//	}
 
 	void OnCollisionEnter(Collision collision){
 		if(!tankHealthManager.empty() && collision.gameObject.tag == "Shell"){

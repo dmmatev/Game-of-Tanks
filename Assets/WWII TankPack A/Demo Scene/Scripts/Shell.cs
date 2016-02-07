@@ -19,14 +19,8 @@ public class Shell : MonoBehaviour {
 	}
 
 	void  Update (){
-
-		// Move Ball forward
-		/*
-		transform.Translate(Vector3.forward * Time.deltaTime * speed);
-		*/
-		// Record Distance.
 		dist += Time.deltaTime;
-		// If reach to my range, Destroy. 
+	 
 		if(dist >= range) {
 			Instantiate(ExploPtcl, transform.position, transform.rotation);
 			Destroy(gameObject);
@@ -41,10 +35,9 @@ public class Shell : MonoBehaviour {
 	}
 	
 	void OnCollisionEnter(Collision collision){
-		// If hit something, Destroy. 
+
 		Instantiate(ExploPtcl, transform.position, transform.rotation);
 		Destroy(gameObject);
-		Debug.Log("AHGSDKJHAGSKDJHGA");
 	}
 	
 }
