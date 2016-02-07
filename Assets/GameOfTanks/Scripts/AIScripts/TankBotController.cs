@@ -10,8 +10,6 @@ public class TankBotController	 : MonoBehaviour
 
 
 	void Awake (){
-		//player = GameObject.FindGameObjectWithTag("Player").transform;
-//		health = player.GetComponent <TankHealth> ();
 		health = GetComponent <TankHealth> ();
 		nav = GetComponent <NavMeshAgent> ();		
 	}
@@ -24,10 +22,12 @@ public class TankBotController	 : MonoBehaviour
 		}
 
 		if(enemyHealth.getTankHealth() > 0 && health.getTankHealth() > 0){
+			//nav.Resume();
 			nav.SetDestination (enemy.position);
 		}else{
 			
 			nav.enabled = false;
+			//nav.Stop();
 		}
 	} 
 }
