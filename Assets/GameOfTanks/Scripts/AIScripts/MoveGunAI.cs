@@ -27,6 +27,7 @@ public class MoveGunAI : MonoBehaviour {
 			}
 
 		}
+		newRotation = Quaternion.LookRotation(player.position - transform.position).eulerAngles;
 
 		if(Mathf.Abs (newRotation.x - transform.rotation.eulerAngles.x) > 1f){
 			float currentRotationX = transform.rotation.eulerAngles.x;
