@@ -18,6 +18,13 @@ public class SmoothCameraFolow : MonoBehaviour {
 
 
 	void  LateUpdate (){
+
+		RaycastHit hit;
+		Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+		Physics.Raycast(ray, out hit, LayerMask.GetMask("Terrain"));
+		//Debug.DrawRay(transform.position,hit.point);
+
 		if (!target)
 			return;
 
@@ -38,12 +45,6 @@ public class SmoothCameraFolow : MonoBehaviour {
 
 
 		transform.position = new Vector3(transform.position.x, currentHeight, transform.position.z);
-
-		RaycastHit hit;
-		Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-
-		Physics.Raycast(ray, out hit, LayerMask.GetMask("Terrain"));
-		Debug.DrawRay(transform.position,hit.point);
 
 	}
 }

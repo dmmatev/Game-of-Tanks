@@ -8,6 +8,7 @@ public class MoveGunAI : MonoBehaviour {
 	TankControllerAI tankControllerAI;
 	TankHealth AIhealth;  
 	Transform player; 
+	Transform firePoint;
 	private Vector3 newRotation;
 
 	void Start(){
@@ -16,6 +17,7 @@ public class MoveGunAI : MonoBehaviour {
 
 	void Awake(){
 		AIhealth = GetComponentInParent <TankHealth> ();
+		firePoint = GetComponentInChildren<Transform>();
 	}
 
 	void  Update (){
@@ -27,13 +29,18 @@ public class MoveGunAI : MonoBehaviour {
 			}
 
 			RaycastHit hit;
-			Ray ray = new Ray(transform.position, Vector3.forward);
+			Ray ray = new Ray(firePoint.position, Vector3.forward);
 			if (Physics.Raycast(ray, out hit, LayerMask.GetMask("Terrain"))){
 				if(hit.collider.gameObject.tag == "Allies"){
+					tankControllerAI.NavStop();
 					tankControllerAI.Fire();
+				}else{
+					tankControllerAI.NavResume();
 				}
-
 			}
+			//Debug.DrawRay(firePoint.position,hit.point);
+
+
 			newRotation = Quaternion.LookRotation(player.position - transform.position).eulerAngles;
 
 			if(Mathf.Abs (newRotation.x - transform.rotation.eulerAngles.x) > 1f){

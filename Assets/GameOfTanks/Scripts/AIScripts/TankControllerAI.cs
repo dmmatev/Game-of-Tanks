@@ -29,7 +29,13 @@ public class TankControllerAI: MonoBehaviour
 		AIhealth = GetComponent <TankHealth> ();
 		nav = GetComponent <NavMeshAgent> ();		
 	}
+	public void NavStop(){
+		nav.Stop();
+	}
 
+	public void NavResume(){
+		nav.Resume();	
+	}
 
 	void Update (){
 		if(!AIhealth.empty()){
