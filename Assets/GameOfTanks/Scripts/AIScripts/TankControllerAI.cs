@@ -32,18 +32,21 @@ public class TankControllerAI: MonoBehaviour
 
 
 	void Update (){
-		if(!player){
-			player = GameObject.FindGameObjectWithTag("Allies").transform;
-			playerHealth = player.GetComponent <TankHealth> ();
-		}
-
-		if(playerHealth.getTankHealth() > 0 && AIhealth.getTankHealth() > 0){
-			//nav.Resume();
-			nav.SetDestination (player.position);
-		}else{
+		if(!AIhealth.empty()){
 			
-			nav.enabled = false;
-			//nav.Stop();
+			if(!player){
+				player = GameObject.FindGameObjectWithTag("Allies").transform;
+				playerHealth = player.GetComponent <TankHealth> ();
+			}
+
+			if(playerHealth.getTankHealth() > 0 && AIhealth.getTankHealth() > 0){
+				//nav.Resume();
+				nav.SetDestination (player.position);
+			}else{
+				
+				nav.enabled = false;
+				//nav.Stop();
+			}
 		}
 	} 
 }
