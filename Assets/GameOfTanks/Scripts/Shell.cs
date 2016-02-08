@@ -14,11 +14,13 @@ public class Shell : MonoBehaviour {
 	
 	private float dist;
 
-	void Start() {
-		GetComponent<Rigidbody>().AddForce(Vector3.forward * 5f);
-	}
+//	void Start() {
+//		GetComponent<Rigidbody>().AddForce(Vector3.forward * 500f);
+//	}
 
 	void  Update (){
+
+		transform.Translate(Vector3.forward * Time.deltaTime * speed);
 		dist += Time.deltaTime;
 	 
 		if(dist >= range) {
