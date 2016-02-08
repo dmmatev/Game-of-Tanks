@@ -30,12 +30,21 @@ public class TankController : MonoBehaviour {
 		rightTrack = GameObject.Find(gameObject.name + "/Righttrack").GetComponent<MoveTrack>();
 		tankHealth = GetComponent<TankHealth>();
 		distToGround = GetComponent<Collider>().bounds.extents.y;
-		gameObject.tag = "Player";
+		gameObject.tag = "Allies";
 		
 	}
 
 	bool isGrounded(){
 		return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
+	}
+
+	void Fire(){
+		Instantiate(fireEffect, spawnPoint.position, spawnPoint.rotation);
+
+		GameObject shell = Instantiate(bulletObject, spawnPoint.position, spawnPoint.rotation) as GameObject;
+		shell.GetComponent<Shell>().armorPenetrationMM = armorPenetrationMM;
+		shell.GetComponent<Shell>().minDamage = minDamage;
+		shell.GetComponent<Shell>().maxDamage = maxDamage;
 	}
 
 	void FixedUpdate(){
@@ -136,18 +145,9 @@ public class TankController : MonoBehaviour {
 					
 				}
 			}
-			
-			
-			// Fire!
+		
 			if (Input.GetButtonDown("Fire1") ) {
-				// make fire effect.
-				Instantiate(fireEffect, spawnPoint.position, spawnPoint.rotation);
-
-				// make ball
-				GameObject shell = Instantiate(bulletObject, spawnPoint.position, spawnPoint.rotation) as GameObject;
-				shell.GetComponent<Shell>().armorPenetrationMM = armorPenetrationMM;
-				shell.GetComponent<Shell>().minDamage = minDamage;
-				shell.GetComponent<Shell>().maxDamage = maxDamage;
+				Fire();
 			}
 
 		}

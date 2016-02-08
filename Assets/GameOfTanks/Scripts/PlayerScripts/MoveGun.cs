@@ -16,6 +16,7 @@ public class MoveGun : MonoBehaviour {
 			
 			newRotation = Quaternion.LookRotation(hit.point - transform.position).eulerAngles;
 		}
+		//Debug.DrawRay(transform.position,hit.point);
 
 		//Debug.Log(newRotation.x);
 		//Debug.Log(transform.rotation.eulerAngles.x);

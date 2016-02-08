@@ -18,7 +18,15 @@ public class MoveGunAI : MonoBehaviour {
 			player = tankControllerAI.player;
 			return;
 		}
-		newRotation = Quaternion.LookRotation(player.position - transform.position).eulerAngles;
+
+		RaycastHit hit;
+		Ray ray = new Ray(transform.position, Vector3.forward);
+		if (Physics.Raycast(ray, out hit, LayerMask.GetMask("Terrain"))){
+			if(hit.collider.gameObject.tag == "Allies"){
+				tankControllerAI.Fire();
+			}
+
+		}
 
 		if(Mathf.Abs (newRotation.x - transform.rotation.eulerAngles.x) > 1f){
 			float currentRotationX = transform.rotation.eulerAngles.x;
