@@ -15,6 +15,8 @@ public class TankControllerAI: MonoBehaviour
 	public int minDamage = 300;
 	public int maxDamage = 410;
 
+	private bool stop = false;
+
 
 	public void Fire(){
 		Instantiate(fireEffect, spawnPoint.position, spawnPoint.rotation);
@@ -31,10 +33,12 @@ public class TankControllerAI: MonoBehaviour
 	}
 	public void NavStop(){
 		nav.Stop();
+		stop = true;
 	}
 
 	public void NavResume(){
-		nav.Resume();	
+		nav.Resume();
+		stop = false;
 	}
 
 	void Update (){
@@ -45,10 +49,11 @@ public class TankControllerAI: MonoBehaviour
 				playerHealth = player.GetComponent <TankHealth> ();
 			}
 
-			if(playerHealth.getTankHealth() > 0 && AIhealth.getTankHealth() > 0){
+			//if(playerHealth.getTankHealth() > 0 && AIhealth.getTankHealth() > 0){
+			if(!stop && AIhealth.getTankHealth() > 0){
 				//nav.Resume();
 				nav.SetDestination (player.position);
-			}else{
+			}else if(!stop){
 				
 				nav.enabled = false;
 				//nav.Stop();
