@@ -31,14 +31,15 @@ public class MoveGunAI : MonoBehaviour {
 			RaycastHit hit;
 			if (Physics.Raycast(firePoint.position, transform.forward, out hit, LayerMask.GetMask("Terrain"))){
 				if(hit.collider.gameObject.tag == "Allies"){
-					tankControllerAI.NavStop();
+					//tankControllerAI.NavStop();
 					tankControllerAI.Fire();
 				}else{
-					tankControllerAI.NavResume();
+					//tankControllerAI.NavResume();
 				}
 			}
 
-			newRotation = Quaternion.LookRotation(player.position - transform.position).eulerAngles;
+			Vector3 errorCorrecting = new Vector3(0,2,0);
+			newRotation = Quaternion.LookRotation(player.position + errorCorrecting - transform.position).eulerAngles;
 
 			if(Mathf.Abs (newRotation.x - transform.rotation.eulerAngles.x) > 1f){
 				float currentRotationX = transform.rotation.eulerAngles.x;

@@ -14,17 +14,22 @@ public class TankControllerAI: MonoBehaviour
 	public int armorPenetrationMM = 163;
 	public int minDamage = 300;
 	public int maxDamage = 410;
+	public float reloadTime = 5f;
 
 	private bool stop = false;
+	private float timer = 0;
 
 
 	public void Fire(){
-		Instantiate(fireEffect, spawnPoint.position, spawnPoint.rotation);
+		if(timer<=0){
+			Instantiate(fireEffect, spawnPoint.position, spawnPoint.rotation);
 
-		GameObject shell = Instantiate(bulletObject, spawnPoint.position, spawnPoint.rotation) as GameObject;
-		shell.GetComponent<Shell>().armorPenetrationMM = armorPenetrationMM;
-		shell.GetComponent<Shell>().minDamage = minDamage;
-		shell.GetComponent<Shell>().maxDamage = maxDamage;
+			GameObject shell = Instantiate(bulletObject, spawnPoint.position, spawnPoint.rotation) as GameObject;
+			shell.GetComponent<Shell>().armorPenetrationMM = armorPenetrationMM;
+			shell.GetComponent<Shell>().minDamage = minDamage;
+			shell.GetComponent<Shell>().maxDamage = maxDamage;
+			timer = reloadTime;
+		}
 	}
 
 	void Awake (){
@@ -43,6 +48,11 @@ public class TankControllerAI: MonoBehaviour
 
 	void Update (){
 		if(!AIhealth.empty()){
+
+			if(timer>0){
+				timer -= Time.deltaTime;
+			}
+
 			
 			if(!player){
 				player = GameObject.FindGameObjectWithTag("Allies").transform;

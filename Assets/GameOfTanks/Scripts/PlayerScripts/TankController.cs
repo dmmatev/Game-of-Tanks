@@ -4,14 +4,15 @@ using System.Collections;
 public class TankController : MonoBehaviour {
 	
 	
-	private MoveTrack leftTrack;
-	private MoveTrack rightTrack;
-	private TankHealth tankHealth;
-	private float currentTime;
-	private float distToGround;
+	MoveTrack leftTrack;
+	MoveTrack rightTrack;
+	TankHealth tankHealth;
+	float currentTime;
+	float distToGround;
+	float timer = 0;
 	
 	public float acceleration = 5f;
-	public float reloadTime = 10f;
+	public float reloadTime = 5f;
 	public float currentVelocity = 0f;
 	public float maxSpeed = 25f;
 	public float rotationSpeed = 30f;
@@ -22,9 +23,6 @@ public class TankController : MonoBehaviour {
 	public Transform spawnPoint;
 	public GameObject bulletObject;
 	public GameObject fireEffect;
-
-	float timer = 0; 
-	public float coolDown = 5f;
 
 
 	void  Start (){
@@ -41,12 +39,15 @@ public class TankController : MonoBehaviour {
 	}
 
 	void Fire(){
-		Instantiate(fireEffect, spawnPoint.position, spawnPoint.rotation);
+		if(timer<=0){
+			Instantiate(fireEffect, spawnPoint.position, spawnPoint.rotation);
 
-		GameObject shell = Instantiate(bulletObject, spawnPoint.position, spawnPoint.rotation) as GameObject;
-		shell.GetComponent<Shell>().armorPenetrationMM = armorPenetrationMM;
-		shell.GetComponent<Shell>().minDamage = minDamage;
-		shell.GetComponent<Shell>().maxDamage = maxDamage;
+			GameObject shell = Instantiate(bulletObject, spawnPoint.position, spawnPoint.rotation) as GameObject;
+			shell.GetComponent<Shell>().armorPenetrationMM = armorPenetrationMM;
+			shell.GetComponent<Shell>().minDamage = minDamage;
+			shell.GetComponent<Shell>().maxDamage = maxDamage;
+			timer = reloadTime;
+		}
 	}
 
 	void TurnRight(){
@@ -87,7 +88,8 @@ public class TankController : MonoBehaviour {
 		if(!tankHealth.empty()){
 			
 			if(timer>0){
-				timer -= Time.deltaTime; 
+				timer -= Time.deltaTime;
+				Debug.Log(timer);
 			}
 		
 			if (Input.GetKey (KeyCode.UpArrow)) {
@@ -145,7 +147,7 @@ public class TankController : MonoBehaviour {
 			}
 		
 			if (Input.GetButtonDown("Fire1") ) {
-				Fire();
+					Fire();	
 			}
 
 		}

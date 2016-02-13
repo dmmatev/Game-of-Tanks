@@ -16,6 +16,15 @@ public class SmoothCameraFolow : MonoBehaviour {
 		cam = GetComponent<Camera>();
 	}
 
+	void Awake(){
+		float wantedRotationAngle = target.eulerAngles.y;
+		float currentRotationAngle = transform.eulerAngles.y;
+		currentRotationAngle = Mathf.LerpAngle (currentRotationAngle, wantedRotationAngle, rotationDamping * Time.deltaTime);
+		Quaternion currentRotation = Quaternion.Euler (0, currentRotationAngle, 0);
+		transform.position = target.position;
+		transform.position -= currentRotation * Vector3.forward * distance;
+	}
+
 
 	void  LateUpdate (){
 
@@ -41,7 +50,7 @@ public class SmoothCameraFolow : MonoBehaviour {
 		Quaternion currentRotation = Quaternion.Euler (0, currentRotationAngle, 0);
 
 		transform.position = target.position;
-		transform.position -= currentRotation * Vector3.forward * distance;
+		transform.position -= currentRotation * Vector3.forward * distance; // Vector3.forward
 
 
 		transform.position = new Vector3(transform.position.x, currentHeight, transform.position.z);
