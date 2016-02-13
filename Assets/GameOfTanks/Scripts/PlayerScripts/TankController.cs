@@ -22,10 +22,12 @@ public class TankController : MonoBehaviour {
 	public Transform spawnPoint;
 	public GameObject bulletObject;
 	public GameObject fireEffect;
-	
+
+	float timer = 0; 
+	public float coolDown = 5f;
+
+
 	void  Start (){
-		
-		// Get Track Controls
 		leftTrack = GameObject.Find(gameObject.name + "/Lefttrack").GetComponent<MoveTrack>();
 		rightTrack = GameObject.Find(gameObject.name + "/Righttrack").GetComponent<MoveTrack>();
 		tankHealth = GetComponent<TankHealth>();
@@ -47,12 +49,46 @@ public class TankController : MonoBehaviour {
 		shell.GetComponent<Shell>().maxDamage = maxDamage;
 	}
 
+	void TurnRight(){
+		transform.Rotate(new Vector3(0, rotationSpeed * Time.deltaTime, 0));
+		leftTrack.speed = rotationSpeed;
+		leftTrack.GearStatus = 1;
+		rightTrack.speed = rotationSpeed;
+		rightTrack.GearStatus = 2;
+	}
+
+	void TurnLeft(){
+		transform.Rotate(new Vector3(0, -rotationSpeed * Time.deltaTime, 0));
+		leftTrack.speed = rotationSpeed;
+		leftTrack.GearStatus = 2;
+		rightTrack.speed = rotationSpeed;
+		rightTrack.GearStatus = 1;
+	}
+
+	void MoveBackward(){
+		leftTrack.speed = -currentVelocity;
+		leftTrack.GearStatus = 2;
+		rightTrack.speed = -currentVelocity;
+		rightTrack.GearStatus = 2;
+	}
+
+	void MoveForward(){
+		leftTrack.speed = currentVelocity;
+		leftTrack.GearStatus = 1;
+		rightTrack.speed = currentVelocity;
+		rightTrack.GearStatus = 1;
+	}
+
 	void FixedUpdate(){
 		
 	}
 	
 	void  Update (){
 		if(!tankHealth.empty()){
+			
+			if(timer>0){
+				timer -= Time.deltaTime; 
+			}
 		
 			if (Input.GetKey (KeyCode.UpArrow)) {
 				// plus speed
@@ -72,8 +108,6 @@ public class TankController : MonoBehaviour {
 					currentVelocity += acceleration * Time.deltaTime;
 				
 			}
-			
-			
 			// Turn off engine if currentVelocity is too small. 
 			if (Mathf.Abs(currentVelocity) <= 0.05f)
 				currentVelocity = 0;
@@ -83,66 +117,30 @@ public class TankController : MonoBehaviour {
 			
 			// Move Tracks by currentVelocity	 
 			if (currentVelocity > 0) {
-				// Move forward
-				leftTrack.speed = currentVelocity;
-				leftTrack.GearStatus = 1;
-				rightTrack.speed = currentVelocity;
-				rightTrack.GearStatus = 1;
+				MoveForward();
 			}
 			else if (currentVelocity < 0)	{
-				// Move Backward
-				leftTrack.speed = -currentVelocity;
-				leftTrack.GearStatus = 2;
-				rightTrack.speed = -currentVelocity;
-				rightTrack.GearStatus = 2;
+				MoveBackward();
 			}
 			else {
 				// No Move
 				leftTrack.GearStatus = 0;	
 				rightTrack.GearStatus = 0;		
 			}
-			
-			
-			// Turn Tank
+
 			if (Input.GetKey (KeyCode.LeftArrow)) {
 				if (Input.GetKey(KeyCode.DownArrow)) {
-					// Turn right
-					transform.Rotate(new Vector3(0, rotationSpeed * Time.deltaTime, 0));
-					
-					leftTrack.speed = rotationSpeed;
-					leftTrack.GearStatus = 1;
-					rightTrack.speed = rotationSpeed;
-					rightTrack.GearStatus = 2;
-					
+					TurnRight();
 				} else {
-					// Turn left
-					transform.Rotate(new Vector3(0, -rotationSpeed * Time.deltaTime, 0));
-					
-					leftTrack.speed = rotationSpeed;
-					leftTrack.GearStatus = 2;
-					rightTrack.speed = rotationSpeed;
-					rightTrack.GearStatus = 1;
-					
+					TurnLeft();
 				}
 			}
 			
 			if (Input.GetKey (KeyCode.RightArrow)) {
 				if (Input.GetKey(KeyCode.DownArrow)) {
-					// Turn left
-					transform.Rotate(new Vector3(0, -rotationSpeed * Time.deltaTime, 0));
-					leftTrack.speed = rotationSpeed;
-					leftTrack.GearStatus = 2;
-					rightTrack.speed = rotationSpeed;
-					rightTrack.GearStatus = 1;
-					
+					TurnLeft();
 				} else {
-					// Turn right
-					transform.Rotate(new Vector3(0, rotationSpeed * Time.deltaTime, 0));
-					leftTrack.speed = rotationSpeed;
-					leftTrack.GearStatus = 1;
-					rightTrack.speed = rotationSpeed;
-					rightTrack.GearStatus = 2;
-					
+					TurnRight();
 				}
 			}
 		
