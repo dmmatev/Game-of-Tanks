@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class MenuManager : MonoBehaviour {
@@ -16,5 +17,13 @@ public class MenuManager : MonoBehaviour {
 
 		CurrentMenu = menu;
 		CurrentMenu.IsOpen = true;
+	}
+
+	public void StartLevel(){
+		Application.LoadLevel("Demo");
+	}
+
+	public void ExitGame(){
+		Application.Quit();
 	}
 }
