@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NewBehaviourScript : MonoBehaviour {
+public class Menu : MonoBehaviour {
 
 	private Animator animator;
 	private CanvasGroup canvasGroup;
