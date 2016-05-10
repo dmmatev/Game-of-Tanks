@@ -40,7 +40,6 @@ public class HealthBarBot : MonoBehaviour
 			player = GameObject.FindGameObjectWithTag("Allies");
 		if(bot != null){
 			typeText.text = bot.tag;
-			Debug.Log(bot.tag);
 		}
 		
 		float dist = Vector3.Distance(player.transform.position, transform.position);

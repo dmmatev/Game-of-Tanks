@@ -16,6 +16,11 @@ public class MouseLook : MonoBehaviour {
 	
 	float rotationY = 0f;
 	float rotationX = 0f;
+	TankHealth playerHealth;
+
+	void Awake(){
+		playerHealth = GetComponentInParent<TankHealth>();
+	}
 
 	void cameraZoom () {
 		float fov = Camera.main.fieldOfView;
@@ -30,7 +35,7 @@ public class MouseLook : MonoBehaviour {
 	}
 	
 	void Update (){
-		if(!Input.GetButton("Ctrl")){
+		if(!Input.GetButton("Ctrl") || playerHealth.empty()){
 			Screen.lockCursor = true;
 			Cursor.visible = false;
 			cameraZoom();

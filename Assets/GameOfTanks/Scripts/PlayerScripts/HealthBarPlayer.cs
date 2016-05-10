@@ -35,7 +35,6 @@ public class HealthBarPlayer : MonoBehaviour
 		currentValue = Map(tankHealth.getTankHealth(), 0, maxHealth, 0, 1);
 
 		visualHealth.fillAmount = Mathf.Lerp(visualHealth.fillAmount, currentValue, Time.deltaTime*healthSpeed);
-		Debug.Log(visualHealth.fillAmount);
 
 		if (tankHealth.getTankHealth() > maxHealth / 2) {
 			visualHealth.color = new Color32((byte)Map(tankHealth.getTankHealth(), maxHealth / 2, maxHealth, 255, 0), 255, 0, 255);

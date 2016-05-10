@@ -23,7 +23,6 @@ public class TankHealth : MonoBehaviour {
 		}else{
 			currentHealth = 0;
 		}
-		Debug.Log(currentHealth);
 	}
 
 }

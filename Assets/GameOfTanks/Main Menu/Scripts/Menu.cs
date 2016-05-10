@@ -23,6 +23,8 @@ public class Menu : MonoBehaviour {
 	}
 
 	void Update(){
+		Screen.lockCursor = false;
+		Cursor.visible = true;
 		if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Open")){
 			canvasGroup.blocksRaycasts = canvasGroup.interactable = false;
 		}else{

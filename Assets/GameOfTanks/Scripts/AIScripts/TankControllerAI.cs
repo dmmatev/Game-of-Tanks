@@ -8,10 +8,11 @@ public class TankControllerAI: MonoBehaviour
 	TankHealth playerHealth;       
 	NavMeshAgent nav;
 	Transform canvas;
-	ScoreManager scoreManager;
+	ScoreController scoreManager;
 	public Transform firePoint;
 	public GameObject bulletObject;
 	public GameObject fireEffect;
+	public GameObject deathExplosion;
 	public int score;
 	bool isSinking = false;
 
@@ -53,7 +54,7 @@ public class TankControllerAI: MonoBehaviour
 	}
 
 	public void Explode(){
-		// explosion here
+		Instantiate(deathExplosion, transform.position, transform.rotation);
 	}
 	public void StartSinking ()
 	{
@@ -73,7 +74,7 @@ public class TankControllerAI: MonoBehaviour
 		}
 		if(!canvas){
 			canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Transform>();
-			scoreManager = canvas.Find("Score").GetComponent<ScoreManager>();
+			scoreManager = canvas.Find("Score").GetComponent<ScoreController>();
 		}
 		
 		if(!AIhealth.empty()){
