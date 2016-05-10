@@ -6,7 +6,7 @@ public class HealthBarFacingCamera : MonoBehaviour
 	public Camera camera;
 
 	void Awake(){
-		
+		camera = Camera.main;
 	}
 
 	void Update()

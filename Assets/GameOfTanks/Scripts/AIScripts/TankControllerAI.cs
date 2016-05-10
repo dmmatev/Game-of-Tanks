@@ -13,7 +13,7 @@ public class TankControllerAI: MonoBehaviour
 	public GameObject bulletObject;
 	public GameObject fireEffect;
 	public int score;
-	bool isSinking;
+	bool isSinking = false;
 
 	public int armorPenetrationMM = 163;
 	public int minDamage = 300;
