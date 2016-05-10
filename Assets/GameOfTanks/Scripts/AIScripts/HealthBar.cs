@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-	private int currentHealth;
-
 	TankHealth tankHealth;
 	GameObject player; 
 	int maxHealth;
@@ -13,12 +11,16 @@ public class HealthBar : MonoBehaviour
 	Text healthText;
 	Image visualHealth;
 	float currentValue;
-	Canvas canvas;
+
+	void Start(){
+		visualHealth = transform.Find("Background/HealthBackground/VisualHealth").GetComponent<Image>();
+		healthText = transform.Find("Background/Text").GetComponent<Text>();
+	}
 
 	void Awake(){
 		
 		tankHealth = GetComponentInParent<TankHealth>();
-		currentHealth = tankHealth.maxHealth; 
+		maxHealth = tankHealth.maxHealth;
 		player = GameObject.FindGameObjectWithTag("Allies");
 	}
 
@@ -37,18 +39,18 @@ public class HealthBar : MonoBehaviour
 		if(dist>50)
 			transform.localScale = new Vector3(-dist/600,dist/600,1);
 
-		healthText.text = "Health: " + currentHealth;
+		healthText.text = "Health: " + tankHealth.getTankHealth();
 
-		currentValue = Map(currentHealth, 0, maxHealth, 0, 1);
+		currentValue = Map(tankHealth.getTankHealth(), 0, maxHealth, 0, 1);
 
-		visualHealth.fillAmount = Mathf.Lerp(visualHealth.fillAmount, currentValue, Time.deltaTime* healthSpeed);
+		visualHealth.fillAmount = Mathf.Lerp(visualHealth.fillAmount, currentValue, Time.deltaTime*healthSpeed);
+		Debug.Log(visualHealth.fillAmount);
 
- 		if (currentHealth > maxHealth / 2) {
-			visualHealth.color = new Color32((byte)Map(currentHealth, maxHealth / 2, maxHealth, 255, 0), 255, 0, 255);
+		if (tankHealth.getTankHealth() > maxHealth / 2) {
+			visualHealth.color = new Color32((byte)Map(tankHealth.getTankHealth(), maxHealth / 2, maxHealth, 255, 0), 255, 0, 255);
 		}
 		else { 
-			
-			visualHealth.color = new Color32(255, (byte)Map(currentHealth, 0, maxHealth / 2, 0, 255), 0, 255);
+			visualHealth.color = new Color32(255, (byte)Map(tankHealth.getTankHealth(), 0, maxHealth / 2, 0, 255), 0, 255);
 		}
 	}
 		
