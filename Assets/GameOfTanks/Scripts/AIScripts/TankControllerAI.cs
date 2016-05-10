@@ -7,24 +7,30 @@ public class TankControllerAI: MonoBehaviour
 	TankHealth AIhealth;      
 	TankHealth playerHealth;       
 	NavMeshAgent nav;
-	public Transform spawnPoint;
+	Transform canvas;
+	ScoreManager scoreManager;
+	public Transform firePoint;
 	public GameObject bulletObject;
 	public GameObject fireEffect;
+	public int score;
+	bool isSinking;
 
 	public int armorPenetrationMM = 163;
 	public int minDamage = 300;
 	public int maxDamage = 410;
 	public float reloadTime = 5f;
+	public float sinkSpeed = 2.5f; 
 
 	private bool stop = false;
 	private float timer = 0;
 
 
+
 	public void Fire(){
 		if(timer<=0){
-			Instantiate(fireEffect, spawnPoint.position, spawnPoint.rotation);
+			Instantiate(fireEffect, firePoint.position, firePoint.rotation);
 
-			GameObject shell = Instantiate(bulletObject, spawnPoint.position, spawnPoint.rotation) as GameObject;
+			GameObject shell = Instantiate(bulletObject, firePoint.position, firePoint.rotation) as GameObject;
 			shell.GetComponent<Shell>().armorPenetrationMM = armorPenetrationMM;
 			shell.GetComponent<Shell>().minDamage = minDamage;
 			shell.GetComponent<Shell>().maxDamage = maxDamage;
@@ -46,7 +52,30 @@ public class TankControllerAI: MonoBehaviour
 		stop = false;
 	}
 
+	public void Explode(){
+		// explosion here
+	}
+	public void StartSinking ()
+	{
+		GetComponent <NavMeshAgent> ().enabled = false;
+		GetComponent <Rigidbody> ().isKinematic = true;
+		if(!isSinking)
+			scoreManager.addScore(score);
+		isSinking = true;
+
+		Destroy (gameObject, 2f);
+	}
+
 	void Update (){
+		if(isSinking)
+		{
+			transform.Translate (-Vector3.up * sinkSpeed * Time.deltaTime);
+		}
+		if(!canvas){
+			canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Transform>();
+			scoreManager = canvas.Find("Score").GetComponent<ScoreManager>();
+		}
+		
 		if(!AIhealth.empty()){
 
 			if(timer>0){
@@ -68,6 +97,9 @@ public class TankControllerAI: MonoBehaviour
 				nav.enabled = false;
 				//nav.Stop();
 			}
+		}else {
+			Explode();
+			StartSinking();
 		}
 	} 
 }

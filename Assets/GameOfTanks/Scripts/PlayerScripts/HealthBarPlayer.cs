@@ -17,13 +17,6 @@ public class HealthBarPlayer : MonoBehaviour
 		healthText = transform.Find("Background/Text").GetComponent<Text>();
 	}
 
-	void Awake(){
-
-//		player = GameObject.FindGameObjectWithTag("Allies");
-//		tankHealth = player.GetComponent<TankHealth>();
-//		maxHealth = tankHealth.maxHealth;
-	}
-
 
 	void Update(){
 

@@ -99,7 +99,6 @@ public class TankController : MonoBehaviour {
 			
 			if(timer>0){
 				timer -= Time.deltaTime;
-				Debug.Log(timer);
 			}
 		
 			if (Input.GetKey (KeyCode.W)) {
