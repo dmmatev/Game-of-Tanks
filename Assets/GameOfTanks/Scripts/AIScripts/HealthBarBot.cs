@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class HealthBar : MonoBehaviour
+public class HealthBarBot : MonoBehaviour
 {
 	TankHealth tankHealth;
 	GameObject player; 
