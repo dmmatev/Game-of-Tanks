@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class MoveGun : MonoBehaviour {
-	public float speed = 15;
+	public float speed = 15f;
 	public float curRotation = 0;
 	public Camera cameraPlayer;
 	private Vector3 newRotation;

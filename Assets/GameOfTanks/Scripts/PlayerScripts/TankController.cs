@@ -66,14 +66,14 @@ public class TankController : MonoBehaviour {
 		rightTrack.GearStatus = 1;
 	}
 
-	void MoveBackward(){
+	void MoveTracksBackward(){
 		leftTrack.speed = -currentVelocity;
 		leftTrack.GearStatus = 2;
 		rightTrack.speed = -currentVelocity;
 		rightTrack.GearStatus = 2;
 	}
 
-	void MoveForward(){
+	void MoveTracksForward(){
 		leftTrack.speed = currentVelocity;
 		leftTrack.GearStatus = 1;
 		rightTrack.speed = currentVelocity;
@@ -92,12 +92,12 @@ public class TankController : MonoBehaviour {
 				Debug.Log(timer);
 			}
 		
-			if (Input.GetKey (KeyCode.UpArrow)) {
+			if (Input.GetKey (KeyCode.W)) {
 				// plus speed
 				if (currentVelocity <= maxSpeed) 
 					currentVelocity += acceleration * Time.deltaTime;
 				
-			} else if (Input.GetKey (KeyCode.DownArrow)) {
+			} else if (Input.GetKey(KeyCode.S)) {
 				// minus speed
 				if (currentVelocity >= -maxSpeed) 
 					currentVelocity -= acceleration * Time.deltaTime;
@@ -119,10 +119,10 @@ public class TankController : MonoBehaviour {
 			
 			// Move Tracks by currentVelocity	 
 			if (currentVelocity > 0) {
-				MoveForward();
+				MoveTracksForward();
 			}
 			else if (currentVelocity < 0)	{
-				MoveBackward();
+				MoveTracksBackward();
 			}
 			else {
 				// No Move
@@ -130,16 +130,16 @@ public class TankController : MonoBehaviour {
 				rightTrack.GearStatus = 0;		
 			}
 
-			if (Input.GetKey (KeyCode.LeftArrow)) {
-				if (Input.GetKey(KeyCode.DownArrow)) {
+			if (Input.GetKey (KeyCode.A)) {
+				if (Input.GetKey(KeyCode.S)) {
 					TurnRight();
 				} else {
 					TurnLeft();
 				}
 			}
 			
-			if (Input.GetKey (KeyCode.RightArrow)) {
-				if (Input.GetKey(KeyCode.DownArrow)) {
+			if (Input.GetKey (KeyCode.D)) {
+				if (Input.GetKey(KeyCode.S)) {
 					TurnLeft();
 				} else {
 					TurnRight();

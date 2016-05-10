@@ -4,7 +4,6 @@ using System.Collections;
 public class MoveGunAI : MonoBehaviour {
 	public float speed = 15;
 	public float curRotation = 0;
-	public Camera cameraPlayer;
 	TankControllerAI tankControllerAI;
 	TankHealth AIhealth;  
 	Transform player; 
