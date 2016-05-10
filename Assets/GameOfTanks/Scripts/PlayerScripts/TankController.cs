@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class TankController : MonoBehaviour {
 	
@@ -32,6 +33,15 @@ public class TankController : MonoBehaviour {
 		distToGround = GetComponent<Collider>().bounds.extents.y;
 		gameObject.tag = "Allies";
 		
+	}
+
+	void OnGUI() {
+		Vector3 mPos = Input.mousePosition;
+		if(timer <=0){
+			GUI.Label(new Rect(mPos.x-100, Screen.height-mPos.y-10, 150, 150), reloadTime.ToString());
+		}else{
+			GUI.Label(new Rect(mPos.x-100, Screen.height-mPos.y-10, 150, 150), Math.Round(timer, 2).ToString());
+		}
 	}
 
 	bool isGrounded(){
@@ -93,31 +103,25 @@ public class TankController : MonoBehaviour {
 			}
 		
 			if (Input.GetKey (KeyCode.W)) {
-				// plus speed
 				if (currentVelocity <= maxSpeed) 
 					currentVelocity += acceleration * Time.deltaTime;
 				
 			} else if (Input.GetKey(KeyCode.S)) {
-				// minus speed
 				if (currentVelocity >= -maxSpeed) 
 					currentVelocity -= acceleration * Time.deltaTime;
 				
 			} else {
-				// No key input. 
 				if (currentVelocity > 0) 
 					currentVelocity -= acceleration * Time.deltaTime;
 				else if (currentVelocity < 0) 
 					currentVelocity += acceleration * Time.deltaTime;
 				
 			}
-			// Turn off engine if currentVelocity is too small. 
 			if (Mathf.Abs(currentVelocity) <= 0.05f)
 				currentVelocity = 0;
 			
-			// Move Tank by currentVelocity
 			transform.Translate(new Vector3(0, 0, currentVelocity * Time.deltaTime));
-			
-			// Move Tracks by currentVelocity	 
+			 
 			if (currentVelocity > 0) {
 				MoveTracksForward();
 			}
@@ -125,7 +129,6 @@ public class TankController : MonoBehaviour {
 				MoveTracksBackward();
 			}
 			else {
-				// No Move
 				leftTrack.GearStatus = 0;	
 				rightTrack.GearStatus = 0;		
 			}

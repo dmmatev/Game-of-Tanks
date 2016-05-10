@@ -27,7 +27,6 @@ public class MouseLook : MonoBehaviour {
 	void OnGUI() {
 		Vector3 mPos = Input.mousePosition;
 		GUI.DrawTexture(new Rect(mPos.x-64, Screen.height-mPos.y-64, 128, 128), cursorImage);
-		Debug.Log(mPos.y);
 	}
 	
 	void Update (){
