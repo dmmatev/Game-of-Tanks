@@ -9,6 +9,10 @@ public class Scores : MonoBehaviour {
 	void Awake () {
 		DontDestroyOnLoad (transform.gameObject);
 		scores = new List<long>();
+		scores.Add(0);
+		scores.Add(0);
+		scores.Add(0);
+
 	}
 
 	public void addScore(long score){
@@ -17,7 +21,7 @@ public class Scores : MonoBehaviour {
 
 	public long Position(int x){
 		scores.Sort();
-		return scores[x];
+		return scores[x];	
 	}
 
 }

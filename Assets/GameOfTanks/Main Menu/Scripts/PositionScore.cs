@@ -10,7 +10,7 @@ public class PositionScore : MonoBehaviour {
 	Scores scoreManager;
 
 	void Awake () {
-		text = GetComponent<Text>();
+		text = GetComponentInChildren<Text>();
 	}
 
 	void Update () {
@@ -18,6 +18,6 @@ public class PositionScore : MonoBehaviour {
 			scoreObject = GameObject.FindGameObjectWithTag("ScoreManager");
 			scoreManager = scoreObject.GetComponent<Scores>();
 		}
-		text.text = scoreManager.Position(position).ToString();
+		text.text = position+1 + ": " + scoreManager.Position(position).ToString();
 	}
 }

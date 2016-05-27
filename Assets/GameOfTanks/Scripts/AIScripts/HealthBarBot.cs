@@ -46,7 +46,7 @@ public class HealthBarBot : MonoBehaviour
 		if(dist>50)
 			transform.localScale = new Vector3(-dist/600,dist/600,1);
 
-		healthText.text = maxHealth + "/" + tankHealth.getTankHealth();
+		healthText.text = tankHealth.getTankHealth()  + "/" + maxHealth;
 
 		currentValue = Map(tankHealth.getTankHealth(), 0, maxHealth, 0, 1);
 

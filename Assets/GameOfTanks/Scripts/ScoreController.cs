@@ -3,21 +3,17 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class ScoreController : MonoBehaviour{
-	static long score;
+	long score;
 	Text text;
 	GameObject player;
 	TankHealth playerHealth;
 	GameObject scoreObject;
 	Scores scoreManager;
 
-	void Awake (){
+	void Start (){
 		
 		text = GetComponent <Text> ();
-//		player = GameObject.FindGameObjectWithTag("Allies");
-//		playerHealth = player.GetComponent<TankHealth>();
-//		scoreObject = GameObject.FindGameObjectWithTag("ScoreManager");
-//		scoreManager = scoreObject.GetComponent<Scores>();
-//		score = 0;
+		score = 0;
 	}
 
 	void Update (){
@@ -26,7 +22,6 @@ public class ScoreController : MonoBehaviour{
 			playerHealth = player.GetComponent<TankHealth>();
 			scoreObject = GameObject.FindGameObjectWithTag("ScoreManager");
 			scoreManager = scoreObject.GetComponent<Scores>();
-			score = 0;
 		}
 		
 		text.text = "Score: " + score;

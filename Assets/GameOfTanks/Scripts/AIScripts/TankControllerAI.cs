@@ -16,6 +16,7 @@ public class TankControllerAI: MonoBehaviour
 	public GameObject deathExplosion;
 	public AudioClip dieSound;
 	public AudioClip shootSound;
+	public AudioClip[] enemyKilledSounds;
 	public int score;
 	bool isSinking = false;
 	bool exploded = false;
@@ -62,6 +63,9 @@ public class TankControllerAI: MonoBehaviour
 	public void Explode(){
 		Instantiate(deathExplosion, transform.position, transform.rotation);
 		source.PlayOneShot(dieSound,1f);
+		System.Random rnd = new System.Random();
+		int number = rnd.Next(0,3);
+		Camera.main.GetComponent<AudioSource>().PlayOneShot(enemyKilledSounds[number],1f);
 		exploded = true;
 	}
 	public void StartSinking ()

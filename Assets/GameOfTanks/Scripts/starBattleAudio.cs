@@ -9,7 +9,7 @@ public class starBattleAudio : MonoBehaviour {
 	void Start(){
 		source = GetComponent<AudioSource>();
 		System.Random rnd = new System.Random();
-		int number = rnd.Next(1, 2);
+		int number = rnd.Next(0, 1);
 		source.PlayOneShot(startBattleSound[number]);
 	}
 }
