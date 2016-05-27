@@ -8,13 +8,17 @@ public class TankControllerAI: MonoBehaviour
 	TankHealth playerHealth;       
 	NavMeshAgent nav;
 	Transform canvas;
+	AudioSource source;
 	ScoreController scoreManager;
 	public Transform firePoint;
 	public GameObject bulletObject;
 	public GameObject fireEffect;
 	public GameObject deathExplosion;
+	public AudioClip dieSound;
+	public AudioClip shootSound;
 	public int score;
 	bool isSinking = false;
+	bool exploded = false;
 
 	public int armorPenetrationMM = 163;
 	public int minDamage = 300;
@@ -29,8 +33,9 @@ public class TankControllerAI: MonoBehaviour
 
 	public void Fire(){
 		if(timer<=0){
-			Instantiate(fireEffect, firePoint.position, firePoint.rotation);
-
+			
+			GameObject fire = Instantiate(fireEffect, firePoint.position, firePoint.rotation) as GameObject;
+			fire.GetComponent<ExplosionAudio>().sound = shootSound;
 			GameObject shell = Instantiate(bulletObject, firePoint.position, firePoint.rotation) as GameObject;
 			shell.GetComponent<Shell>().armorPenetrationMM = armorPenetrationMM;
 			shell.GetComponent<Shell>().minDamage = minDamage;
@@ -41,7 +46,8 @@ public class TankControllerAI: MonoBehaviour
 
 	void Awake (){
 		AIhealth = GetComponent <TankHealth> ();
-		nav = GetComponent <NavMeshAgent> ();		
+		nav = GetComponent <NavMeshAgent> ();
+		source = GetComponent<AudioSource>();
 	}
 	public void NavStop(){
 		nav.Stop();
@@ -55,6 +61,8 @@ public class TankControllerAI: MonoBehaviour
 
 	public void Explode(){
 		Instantiate(deathExplosion, transform.position, transform.rotation);
+		source.PlayOneShot(dieSound,1f);
+		exploded = true;
 	}
 	public void StartSinking ()
 	{
@@ -99,7 +107,8 @@ public class TankControllerAI: MonoBehaviour
 				//nav.Stop();
 			}
 		}else {
-			Explode();
+			if(!exploded)
+				Explode();
 			StartSinking();
 		}
 	} 

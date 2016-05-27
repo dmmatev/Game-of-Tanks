@@ -11,7 +11,7 @@ public class TankController : MonoBehaviour {
 	float currentTime;
 	float distToGround;
 	float timer = 0;
-	AudioSource source;
+	AudioSource engineSource;
 	float volLowRange = 0.5f;
 	float volHighRange = 1.0f;
 	
@@ -28,6 +28,7 @@ public class TankController : MonoBehaviour {
 	public GameObject bulletObject;
 	public GameObject fireEffect;
 	public AudioClip shootSound;
+	public AudioClip moveEngineSound;
 
 
 	void  Start (){
@@ -36,7 +37,7 @@ public class TankController : MonoBehaviour {
 		tankHealth = GetComponent<TankHealth>();
 		distToGround = GetComponent<Collider>().bounds.extents.y;
 		gameObject.tag = "Allies";
-		source = GetComponentInChildren<AudioSource>();
+		engineSource = GetComponent<AudioSource>();
 	}
 
 	void OnGUI() {
@@ -54,10 +55,8 @@ public class TankController : MonoBehaviour {
 
 	void Fire(){
 		if(timer<=0){
-			Instantiate(fireEffect, spawnPoint.position, spawnPoint.rotation);
-			System.Random rnd = new System.Random();
-			float vol = (float) rnd.NextDouble() * (volHighRange - volLowRange) + volLowRange;
-			source.PlayOneShot(shootSound,vol);
+			GameObject fire = Instantiate(fireEffect, spawnPoint.position, spawnPoint.rotation) as GameObject;
+			fire.GetComponent<ExplosionAudio>().sound = shootSound;
 			GameObject shell = Instantiate(bulletObject, spawnPoint.position, spawnPoint.rotation) as GameObject;
 			shell.GetComponent<Shell>().armorPenetrationMM = armorPenetrationMM;
 			shell.GetComponent<Shell>().minDamage = minDamage;
@@ -102,8 +101,11 @@ public class TankController : MonoBehaviour {
 	
 	void  Update (){
 		if(!tankHealth.empty()){
-			
-			if(timer>0){
+			float pitch = currentVelocity/maxSpeed +0.3f;
+			if((pitch >=0.3f && pitch <=1.1f) || (pitch <=-0.3f && pitch >=-1.1f) ){
+				engineSource.pitch = pitch;	
+			}
+			if(timer>0){	
 				timer -= Time.deltaTime;
 			}
 		
@@ -112,6 +114,7 @@ public class TankController : MonoBehaviour {
 					currentVelocity += acceleration * Time.deltaTime;
 				
 			} else if (Input.GetKey(KeyCode.S)) {
+
 				if (currentVelocity >= -maxSpeed) 
 					currentVelocity -= acceleration * Time.deltaTime;
 				
