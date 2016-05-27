@@ -11,6 +11,9 @@ public class TankController : MonoBehaviour {
 	float currentTime;
 	float distToGround;
 	float timer = 0;
+	AudioSource source;
+	float volLowRange = 0.5f;
+	float volHighRange = 1.0f;
 	
 	public float acceleration = 5f;
 	public float reloadTime = 5f;
@@ -24,6 +27,7 @@ public class TankController : MonoBehaviour {
 	public Transform spawnPoint;
 	public GameObject bulletObject;
 	public GameObject fireEffect;
+	public AudioClip shootSound;
 
 
 	void  Start (){
@@ -32,7 +36,7 @@ public class TankController : MonoBehaviour {
 		tankHealth = GetComponent<TankHealth>();
 		distToGround = GetComponent<Collider>().bounds.extents.y;
 		gameObject.tag = "Allies";
-		
+		source = GetComponentInChildren<AudioSource>();
 	}
 
 	void OnGUI() {
@@ -51,7 +55,9 @@ public class TankController : MonoBehaviour {
 	void Fire(){
 		if(timer<=0){
 			Instantiate(fireEffect, spawnPoint.position, spawnPoint.rotation);
-
+			System.Random rnd = new System.Random();
+			float vol = (float) rnd.NextDouble() * (volHighRange - volLowRange) + volLowRange;
+			source.PlayOneShot(shootSound,vol);
 			GameObject shell = Instantiate(bulletObject, spawnPoint.position, spawnPoint.rotation) as GameObject;
 			shell.GetComponent<Shell>().armorPenetrationMM = armorPenetrationMM;
 			shell.GetComponent<Shell>().minDamage = minDamage;

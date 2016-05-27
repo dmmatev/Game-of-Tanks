@@ -16,10 +16,11 @@ public class MouseLook : MonoBehaviour {
 	
 	float rotationY = 0f;
 	float rotationX = 0f;
+	public GameObject player;
 	TankHealth playerHealth;
 
 	void Awake(){
-		playerHealth = GetComponentInParent<TankHealth>();
+		playerHealth = player.GetComponentInParent<TankHealth>();
 	}
 
 	void cameraZoom () {
