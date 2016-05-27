@@ -15,15 +15,18 @@ public class ScoreController : MonoBehaviour{
 		text = GetComponent <Text> ();
 //		player = GameObject.FindGameObjectWithTag("Allies");
 //		playerHealth = player.GetComponent<TankHealth>();
-		scoreObject = GameObject.FindGameObjectWithTag("ScoreManager");
-		scoreManager = scoreObject.GetComponent<Scores>();
-		score = 0;
+//		scoreObject = GameObject.FindGameObjectWithTag("ScoreManager");
+//		scoreManager = scoreObject.GetComponent<Scores>();
+//		score = 0;
 	}
 
 	void Update (){
-		if(!player){
+		if(!player || !scoreManager){
 			player = GameObject.FindGameObjectWithTag("Allies");
 			playerHealth = player.GetComponent<TankHealth>();
+			scoreObject = GameObject.FindGameObjectWithTag("ScoreManager");
+			scoreManager = scoreObject.GetComponent<Scores>();
+			score = 0;
 		}
 		
 		text.text = "Score: " + score;
