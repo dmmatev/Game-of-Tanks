@@ -110,11 +110,11 @@ public class TankController : MonoBehaviour {
 				timer -= Time.deltaTime;
 			}
 		
-			if (Input.GetKey (KeyCode.W)) {
+			if (Input.GetKey (KeyCode.W) && isGrounded()) {
 				if (currentVelocity <= maxSpeed) 
 					currentVelocity += acceleration * Time.deltaTime;
 				
-			} else if (Input.GetKey(KeyCode.S)) {
+			} else if (Input.GetKey(KeyCode.S)  && isGrounded()) {
 
 				if (currentVelocity >= -maxSpeed) 
 					currentVelocity -= acceleration * Time.deltaTime;
@@ -142,7 +142,7 @@ public class TankController : MonoBehaviour {
 				rightTrack.GearStatus = 0;		
 			}
 
-			if (Input.GetKey (KeyCode.A)) {
+			if (Input.GetKey (KeyCode.A) && isGrounded()) {
 				if (Input.GetKey(KeyCode.S)) {
 					TurnRight();
 				} else {
@@ -150,7 +150,7 @@ public class TankController : MonoBehaviour {
 				}
 			}
 			
-			if (Input.GetKey (KeyCode.D)) {
+			if (Input.GetKey (KeyCode.D) && isGrounded()) {
 				if (Input.GetKey(KeyCode.S)) {
 					TurnLeft();
 				} else {
@@ -158,7 +158,7 @@ public class TankController : MonoBehaviour {
 				}
 			}
 		
-			if (Input.GetButtonDown("Fire1") ) {
+			if (Input.GetButtonDown("Fire1") && isGrounded()) {
 					Fire();	
 			}
 
