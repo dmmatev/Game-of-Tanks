@@ -27,7 +27,7 @@ public class ScoreController : MonoBehaviour{
 		text.text = "Score: " + score;
 		if(playerHealth.empty()){
 			scoreManager.addScore(score);
-			Application.LoadLevel("MainMenu");
+			//Application.LoadLevel("MainMenu");
 		}
 	}
 	public void addScore(int newScore){

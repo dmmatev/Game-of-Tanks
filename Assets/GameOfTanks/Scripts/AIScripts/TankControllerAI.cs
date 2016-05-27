@@ -61,7 +61,7 @@ public class TankControllerAI: MonoBehaviour
 	}
 
 	public void Explode(){
-		Instantiate(deathExplosion, transform.position, transform.rotation);
+		Instantiate(deathExplosion, transform.position + new Vector3(0,6,0), transform.rotation);
 		source.PlayOneShot(dieSound,1f);
 		System.Random rnd = new System.Random();
 		int number = rnd.Next(0,3);

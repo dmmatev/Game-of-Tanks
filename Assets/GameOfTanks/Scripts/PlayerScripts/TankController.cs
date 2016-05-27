@@ -3,6 +3,12 @@ using System.Collections;
 using System;
 
 public class TankController : MonoBehaviour {
+
+	IEnumerator Wait() {
+		isWaiting = true;
+		yield return new WaitForSeconds(2f);
+		isWaiting = false;
+	}
 	
 	
 	MoveTrack leftTrack;
@@ -12,8 +18,8 @@ public class TankController : MonoBehaviour {
 	float distToGround;
 	float timer = 0;
 	AudioSource engineSource;
-	float volLowRange = 0.5f;
-	float volHighRange = 1.0f;
+	bool exploded = false;
+	bool isWaiting = true;
 	
 	public float acceleration = 5f;
 	public float reloadTime = 5f;
@@ -29,7 +35,9 @@ public class TankController : MonoBehaviour {
 	public GameObject fireEffect;
 	public AudioClip shootSound;
 	public AudioClip moveEngineSound;
-
+	public GameObject deathExplosion;
+	public AudioClip dieSound;
+	public AudioClip deathMessageSound;
 
 
 	void  Start (){
@@ -94,6 +102,13 @@ public class TankController : MonoBehaviour {
 		leftTrack.GearStatus = 1;
 		rightTrack.speed = currentVelocity;
 		rightTrack.GearStatus = 1;
+	}
+
+	public void Explode(){
+		Instantiate(deathExplosion, transform.position + new Vector3(0,6,0), transform.rotation);
+		engineSource.PlayOneShot(dieSound,1f);
+		Camera.main.GetComponent<AudioSource>().PlayOneShot(deathMessageSound,1f);
+		exploded = true;
 	}
 
 	void FixedUpdate(){
@@ -162,6 +177,13 @@ public class TankController : MonoBehaviour {
 					Fire();	
 			}
 
+		}else{
+			if(!exploded){
+				Explode();
+				StartCoroutine(Wait());
+			}
+			if(!isWaiting)
+				Application.LoadLevel("MainMenu");
 		}
 	}
 }
