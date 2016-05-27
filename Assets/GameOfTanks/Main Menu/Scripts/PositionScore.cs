@@ -10,6 +10,7 @@ public class PositionScore : MonoBehaviour {
 	Scores scoreManager;
 
 	void Awake () {
+		DontDestroyOnLoad (transform.gameObject);
 		text = GetComponentInChildren<Text>();
 	}
 
