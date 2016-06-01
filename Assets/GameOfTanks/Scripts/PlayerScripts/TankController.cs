@@ -3,12 +3,6 @@ using System.Collections;
 using System;
 
 public class TankController : MonoBehaviour {
-
-	IEnumerator Wait() {
-		isWaiting = true;
-		yield return new WaitForSeconds(2f);
-		isWaiting = false;
-	}
 	
 	
 	MoveTrack leftTrack;
@@ -19,7 +13,6 @@ public class TankController : MonoBehaviour {
 	float timer = 0;
 	AudioSource engineSource;
 	bool exploded = false;
-	bool isWaiting = true;
 	
 	public float acceleration = 5f;
 	public float reloadTime = 5f;
@@ -180,10 +173,8 @@ public class TankController : MonoBehaviour {
 		}else{
 			if(!exploded){
 				Explode();
-				StartCoroutine(Wait());
 			}
-			if(!isWaiting)
-				Application.LoadLevel("MainMenu");
+
 		}
 	}
 }

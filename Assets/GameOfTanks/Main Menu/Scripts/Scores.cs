@@ -13,6 +13,7 @@ public class Scores : MonoBehaviour {
 		scores.Add(0);
 		scores.Add(0);
 		scores.Add(0);
+
 	}
 
 	public void addScore(long score){

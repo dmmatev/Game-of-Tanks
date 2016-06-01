@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AIManager : MonoBehaviour {
+public class SpawnManager : MonoBehaviour {
 
 	public TankHealth playerHealth;      
-	public GameObject bot;                
+	public GameObject gobject;                
 	public float spawnTime = 35f;           
 	public Transform[] spawnPoints;         
 
@@ -22,6 +22,6 @@ public class AIManager : MonoBehaviour {
 		}
 		int spawnPointIndex = Random.Range (0, spawnPoints.Length);
 
-		Instantiate (bot, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+		Instantiate (gobject, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
 	}
 }

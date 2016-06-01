@@ -1,8 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ScoreController : MonoBehaviour{
+
+	IEnumerator Wait() {
+		isWaiting = true;
+		yield return new WaitForSeconds(2f);
+		isWaiting = false;
+	}
+
+	bool isWaiting = true;
 	long score;
 	Text text;
 	GameObject player;
@@ -27,7 +36,10 @@ public class ScoreController : MonoBehaviour{
 		text.text = "Score: " + score;
 		if(playerHealth.empty()){
 			scoreManager.addScore(score);
-			//Application.LoadLevel("MainMenu");
+			if(isWaiting)
+				StartCoroutine(Wait());
+			if(!isWaiting)
+				SceneManager.LoadScene("MainMenu");
 		}
 	}
 	public void addScore(int newScore){

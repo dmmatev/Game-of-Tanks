@@ -23,6 +23,7 @@ public class SmoothCameraFolow : MonoBehaviour {
 		Quaternion currentRotation = Quaternion.Euler (0, currentRotationAngle, 0);
 		transform.position = target.position;
 		transform.position -= currentRotation * Vector3.forward * distance;
+		//Application.targetFrameRate = 300;
 	}
 
 
