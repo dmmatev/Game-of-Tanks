@@ -10,11 +10,6 @@ public class SmoothCameraFolow : MonoBehaviour {
 
 	public float heightDamping = 2.0f;
 	public float rotationDamping = 3.0f;
-	Camera cam;
-
-	void Start(){
-		cam = GetComponent<Camera>();
-	}
 
 	void Awake(){
 		float wantedRotationAngle = target.eulerAngles.y;
@@ -23,18 +18,10 @@ public class SmoothCameraFolow : MonoBehaviour {
 		Quaternion currentRotation = Quaternion.Euler (0, currentRotationAngle, 0);
 		transform.position = target.position;
 		transform.position -= currentRotation * Vector3.forward * distance;
-		//Application.targetFrameRate = 300;
 	}
 
 
 	void  LateUpdate (){
-
-		RaycastHit hit;
-		Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-
-		Physics.Raycast(ray, out hit, LayerMask.GetMask("Terrain"));
-		//Debug.DrawRay(transform.position,hit.point);
-
 
 		if (!target)
 			return;
@@ -45,14 +32,14 @@ public class SmoothCameraFolow : MonoBehaviour {
 		float currentRotationAngle = transform.eulerAngles.y;
 		float currentHeight = transform.position.y;
 
-		currentRotationAngle = Mathf.LerpAngle (currentRotationAngle, wantedRotationAngle, rotationDamping * Time.deltaTime);
+		//currentRotationAngle = Mathf.LerpAngle (currentRotationAngle, wantedRotationAngle, rotationDamping * Time.deltaTime);
 	
 		currentHeight = Mathf.Lerp (currentHeight, wantedHeight, heightDamping * Time.deltaTime);
 	
 		Quaternion currentRotation = Quaternion.Euler (0, currentRotationAngle, 0);
 
 		transform.position = target.position;
-		transform.position -= currentRotation * Vector3.forward * distance; // Vector3.forward
+		transform.position -= currentRotation * Vector3.forward * distance; 
 
 
 		transform.position = new Vector3(transform.position.x, currentHeight, transform.position.z);
