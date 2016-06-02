@@ -117,6 +117,10 @@ public class TankController : MonoBehaviour {
 			if(timer>0){	
 				timer -= Time.deltaTime;
 			}
+
+			if(!isGrounded() && Input.GetKey(KeyCode.R)){
+				transform.rotation = new Quaternion(0,0,0,0);
+			}
 		
 			if (Input.GetKey (KeyCode.W) && isGrounded()) {
 				if (currentVelocity <= maxSpeed) 
