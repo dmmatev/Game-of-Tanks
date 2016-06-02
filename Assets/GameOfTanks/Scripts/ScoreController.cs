@@ -12,6 +12,7 @@ public class ScoreController : MonoBehaviour{
 	}
 
 	bool isWaiting = true;
+	bool scoreSent = false;
 	long score;
 	Text text;
 	GameObject player;
@@ -35,7 +36,10 @@ public class ScoreController : MonoBehaviour{
 		
 		text.text = "Score: " + score;
 		if(playerHealth.empty()){
-			scoreManager.addScore(score);
+			if(!scoreSent){
+				scoreManager.addScore(score);
+				scoreSent = true;
+			}
 			if(isWaiting)
 				StartCoroutine(Wait());
 			if(!isWaiting)
