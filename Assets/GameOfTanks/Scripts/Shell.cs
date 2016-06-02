@@ -11,11 +11,17 @@ public class Shell : MonoBehaviour {
 	private int damage;
 	public int armorPenetrationMM = 100;	
 	public GameObject ExploPtcl;
+	Rigidbody rigidbody;
 	
 	private float dist;
 
+	void Awake(){
+		rigidbody = GetComponent<Rigidbody>();
+		
+	}
+
 	void  Update (){
-		transform.Translate(Vector3.forward * Time.deltaTime * speed);
+		//transform.Translate(Vector3.forward * Time.deltaTime * speed);
 		dist += Time.deltaTime;
 	 
 		if(dist >= range) {

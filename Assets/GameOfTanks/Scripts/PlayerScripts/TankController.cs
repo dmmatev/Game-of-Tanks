@@ -13,6 +13,7 @@ public class TankController : MonoBehaviour {
 	float timer = 0;
 	AudioSource engineSource;
 	bool exploded = false;
+	RaycastHit hit;
 	
 	public float acceleration = 5f;
 	public float reloadTime = 5f;
@@ -63,6 +64,7 @@ public class TankController : MonoBehaviour {
 			shell.GetComponent<Shell>().armorPenetrationMM = armorPenetrationMM;
 			shell.GetComponent<Shell>().minDamage = minDamage;
 			shell.GetComponent<Shell>().maxDamage = maxDamage;
+			shell.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0,0,200),ForceMode.VelocityChange);
 			timer = reloadTime;
 		}
 	}
@@ -103,17 +105,18 @@ public class TankController : MonoBehaviour {
 		Camera.main.GetComponent<AudioSource>().PlayOneShot(deathMessageSound,1f);
 		exploded = true;
 	}
-
-	void FixedUpdate(){
 		
-	}
-	
 	void  Update (){
 		if(!tankHealth.empty()){
 			float pitch = currentVelocity/maxSpeed +0.3f;
 			if((pitch >=0.3f && pitch <=1.1f) || (pitch <=-0.3f && pitch >=-1.1f) ){
 				engineSource.pitch = pitch;	
 			}
+
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+			Physics.Raycast(ray, out hit, LayerMask.GetMask("Terrain"));
+
 			if(timer>0){	
 				timer -= Time.deltaTime;
 			}

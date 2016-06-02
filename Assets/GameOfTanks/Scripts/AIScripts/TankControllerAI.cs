@@ -41,6 +41,7 @@ public class TankControllerAI: MonoBehaviour
 			shell.GetComponent<Shell>().armorPenetrationMM = armorPenetrationMM;
 			shell.GetComponent<Shell>().minDamage = minDamage;
 			shell.GetComponent<Shell>().maxDamage = maxDamage;
+			shell.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0,0,200),ForceMode.VelocityChange);
 			timer = reloadTime;
 		}
 	}

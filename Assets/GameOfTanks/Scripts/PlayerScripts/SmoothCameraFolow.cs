@@ -35,6 +35,7 @@ public class SmoothCameraFolow : MonoBehaviour {
 		Physics.Raycast(ray, out hit, LayerMask.GetMask("Terrain"));
 		//Debug.DrawRay(transform.position,hit.point);
 
+
 		if (!target)
 			return;
 
