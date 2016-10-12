@@ -11,7 +11,7 @@ public class TankHealth : MonoBehaviour {
 	}
 
 	public bool empty(){
-		return (currentHealth <= 0)? true:false;
+		return currentHealth <= 0;
 	}
 
 	public int getTankHealth(){
@@ -22,6 +22,12 @@ public class TankHealth : MonoBehaviour {
 			currentHealth -= health;
 		}else{
 			currentHealth = 0;
+		}
+	}
+	public void addHealth(int health){
+		currentHealth +=health;
+		if(currentHealth > maxHealth){
+			currentHealth = maxHealth;
 		}
 	}
 

@@ -13,6 +13,7 @@ public class Scores : MonoBehaviour {
 		scores.Add(0);
 		scores.Add(0);
 		scores.Add(0);
+
 	}
 
 	public void addScore(long score){
@@ -20,8 +21,8 @@ public class Scores : MonoBehaviour {
 	}
 
 	public long Position(int x){
-		scores.Sort((a, b) => -1* a.CompareTo(b));
-		return scores[x];	
+		var scoresDesc = scores.OrderByDescending(i => i).ToList();
+		return scoresDesc[x];	
 	}
 
 }

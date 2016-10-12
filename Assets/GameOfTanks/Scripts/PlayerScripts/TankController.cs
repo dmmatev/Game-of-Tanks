@@ -12,8 +12,8 @@ public class TankController : MonoBehaviour {
 	float distToGround;
 	float timer = 0;
 	AudioSource engineSource;
-	float volLowRange = 0.5f;
-	float volHighRange = 1.0f;
+	bool exploded = false;
+	RaycastHit hit;
 	
 	public float acceleration = 5f;
 	public float reloadTime = 5f;
@@ -29,7 +29,9 @@ public class TankController : MonoBehaviour {
 	public GameObject fireEffect;
 	public AudioClip shootSound;
 	public AudioClip moveEngineSound;
-
+	public GameObject deathExplosion;
+	public AudioClip dieSound;
+	public AudioClip deathMessageSound;
 
 
 	void  Start (){
@@ -62,6 +64,7 @@ public class TankController : MonoBehaviour {
 			shell.GetComponent<Shell>().armorPenetrationMM = armorPenetrationMM;
 			shell.GetComponent<Shell>().minDamage = minDamage;
 			shell.GetComponent<Shell>().maxDamage = maxDamage;
+			shell.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0,0,200),ForceMode.VelocityChange);
 			timer = reloadTime;
 		}
 	}
@@ -96,18 +99,30 @@ public class TankController : MonoBehaviour {
 		rightTrack.GearStatus = 1;
 	}
 
-	void FixedUpdate(){
-		
+	public void Explode(){
+		Instantiate(deathExplosion, transform.position + new Vector3(0,6,0), transform.rotation);
+		engineSource.PlayOneShot(dieSound,1f);
+		Camera.main.GetComponent<AudioSource>().PlayOneShot(deathMessageSound,1f);
+		exploded = true;
 	}
-	
+		
 	void  Update (){
 		if(!tankHealth.empty()){
 			float pitch = currentVelocity/maxSpeed +0.3f;
 			if((pitch >=0.3f && pitch <=1.1f) || (pitch <=-0.3f && pitch >=-1.1f) ){
 				engineSource.pitch = pitch;	
 			}
+
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+			Physics.Raycast(ray, out hit, LayerMask.GetMask("Terrain"));
+
 			if(timer>0){	
 				timer -= Time.deltaTime;
+			}
+
+			if(!isGrounded() && Input.GetKey(KeyCode.R)){
+				transform.rotation = new Quaternion(0,0,0,0);
 			}
 		
 			if (Input.GetKey (KeyCode.W) && isGrounded()) {
@@ -160,6 +175,11 @@ public class TankController : MonoBehaviour {
 		
 			if (Input.GetButtonDown("Fire1") && isGrounded()) {
 					Fire();	
+			}
+
+		}else{
+			if(!exploded){
+				Explode();
 			}
 
 		}
